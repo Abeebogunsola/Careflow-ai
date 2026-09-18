@@ -1,0 +1,256 @@
+// ============================================================================
+// CareFlow AI — Power BI DAX Measures Specification (Phase 9)
+//
+// Source of truth: docs/system-architecture.md - Section 17 & docs/PRD.md - Section 9.
+// Contains standard, production-grade DAX measures for all 4 core dashboards:
+// 1. Program Overview & Care Retention
+// 2. Client Engagement & Communication
+// 3. Non-Clinical Barriers to Care
+// 4. Escalations & Clinical Safety Oversight
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// DOMAIN 1: ENROLLMENT & ACTIVE CLIENTS
+// ----------------------------------------------------------------------------
+
+Total Enrolled Clients = 
+DISTINCTCOUNT(dim_client[client_key])
+
+Active Clients = 
+CALCULATE(
+    DISTINCTCOUNT(dim_client[client_key]),
+    dim_client[is_active] = 1
+)
+
+Inactive Clients = 
+CALCULATE(
+    DISTINCTCOUNT(dim_client[client_key]),
+    dim_client[is_active] = 0
+)
+
+Program Retention Rate = 
+DIVIDE(
+    [Active Clients],
+    [Total Enrolled Clients],
+    0
+)
+
+
+// ----------------------------------------------------------------------------
+// DOMAIN 2: APPOINTMENTS & CLINICAL RETENTION ADHERENCE
+// ----------------------------------------------------------------------------
+
+Total Appointments = 
+COUNTROWS(fact_appointments)
+
+Scheduled Appointments = 
+CALCULATE(
+    COUNTROWS(fact_appointments),
+    fact_appointments[status] = "scheduled"
+)
+
+Completed Appointments = 
+CALCULATE(
+    COUNTROWS(fact_appointments),
+    fact_appointments[status] = "completed"
+)
+
+Missed Appointments = 
+CALCULATE(
+    COUNTROWS(fact_appointments),
+    fact_appointments[status] = "missed"
+)
+
+Cancelled Appointments = 
+CALCULATE(
+    COUNTROWS(fact_appointments),
+    fact_appointments[status] = "cancelled"
+)
+
+Rescheduled Appointments = 
+CALCULATE(
+    COUNTROWS(fact_appointments),
+    fact_appointments[status] = "rescheduled"
+)
+
+// Finalized visits that were either attended or missed
+Finalized Scheduled Visits = 
+[Completed Appointments] + [Missed Appointments]
+
+// Adherence Rate: proportion of scheduled visits actually attended
+Appointment Adherence Rate = 
+DIVIDE(
+    [Completed Appointments],
+    [Finalized Scheduled Visits],
+    0
+)
+
+Missed Appointment Rate = 
+DIVIDE(
+    [Missed Appointments],
+    [Finalized Scheduled Visits],
+    0
+)
+
+
+// ----------------------------------------------------------------------------
+// DOMAIN 3: COMMUNICATION & ENGAGEMENT
+// ----------------------------------------------------------------------------
+
+Total Recorded Interactions = 
+COUNTROWS(fact_interactions)
+
+Inbound Client Messages = 
+CALCULATE(
+    COUNTROWS(fact_interactions),
+    fact_interactions[direction] = "incoming"
+)
+
+Outbound Staff and AI Messages = 
+CALCULATE(
+    COUNTROWS(fact_interactions),
+    fact_interactions[direction] = "outgoing"
+)
+
+Appointment Reminders Sent = 
+CALCULATE(
+    COUNTROWS(fact_interactions),
+    fact_interactions[interaction_type] = "appointment_reminder"
+)
+
+Automated AI Responses = 
+CALCULATE(
+    COUNTROWS(fact_interactions),
+    fact_interactions[interaction_type] = "ai_response"
+)
+
+Inbound to Outbound Ratio = 
+DIVIDE(
+    [Inbound Client Messages],
+    [Outbound Staff and AI Messages],
+    0
+)
+
+SMS Interaction Volume = 
+CALCULATE(
+    COUNTROWS(fact_interactions),
+    fact_interactions[channel] = "sms"
+)
+
+WhatsApp Interaction Volume = 
+CALCULATE(
+    COUNTROWS(fact_interactions),
+    fact_interactions[channel] = "whatsapp"
+)
+
+
+// ----------------------------------------------------------------------------
+// DOMAIN 4: NON-CLINICAL BARRIERS TO CARE
+// ----------------------------------------------------------------------------
+
+Total Follow-Up Tasks = 
+COUNTROWS(fact_followups)
+
+Pending Follow-Up Tasks = 
+CALCULATE(
+    COUNTROWS(fact_followups),
+    fact_followups[status] = "pending"
+)
+
+Completed Follow-Up Tasks = 
+CALCULATE(
+    COUNTROWS(fact_followups),
+    fact_followups[status] = "completed"
+)
+
+Follow-Up Resolution Rate = 
+DIVIDE(
+    [Completed Follow-Up Tasks],
+    [Total Follow-Up Tasks],
+    0
+)
+
+Reported Transport Barriers = 
+CALCULATE(
+    COUNTROWS(fact_followups),
+    fact_followups[barrier_category] = "transport"
+)
+
+Reported Schedule Barriers = 
+CALCULATE(
+    COUNTROWS(fact_followups),
+    fact_followups[barrier_category] = "schedule"
+)
+
+Reported Financial Barriers = 
+CALCULATE(
+    COUNTROWS(fact_followups),
+    fact_followups[barrier_category] = "financial_or_logistical"
+)
+
+Reported Clinic Access Barriers = 
+CALCULATE(
+    COUNTROWS(fact_followups),
+    fact_followups[barrier_category] = "clinic_access"
+)
+
+Transport Barrier Percentage = 
+DIVIDE(
+    [Reported Transport Barriers],
+    [Total Follow-Up Tasks],
+    0
+)
+
+
+// ----------------------------------------------------------------------------
+// DOMAIN 5: ESCALATIONS & CLINICAL SAFETY OVERSIGHT
+// ----------------------------------------------------------------------------
+
+Total Human Escalations = 
+COUNTROWS(fact_escalations)
+
+Open Escalations = 
+CALCULATE(
+    COUNTROWS(fact_escalations),
+    fact_escalations[status] = "open"
+)
+
+Resolved Escalations = 
+CALCULATE(
+    COUNTROWS(fact_escalations),
+    fact_escalations[status] = "resolved"
+)
+
+Escalation Resolution Rate = 
+DIVIDE(
+    [Resolved Escalations],
+    [Total Human Escalations],
+    0
+)
+
+Clinical Concern Escalations = 
+CALCULATE(
+    COUNTROWS(fact_escalations),
+    fact_escalations[escalation_category] = "clinical_concern"
+)
+
+Medication Concern Escalations = 
+CALCULATE(
+    COUNTROWS(fact_escalations),
+    fact_escalations[escalation_category] = "medication_concern"
+)
+
+Emergency Escalations = 
+CALCULATE(
+    COUNTROWS(fact_escalations),
+    fact_escalations[escalation_category] = "emergency_related"
+)
+
+Staff Request Escalations = 
+CALCULATE(
+    COUNTROWS(fact_escalations),
+    fact_escalations[escalation_category] = "human_request"
+)
+
+Average Escalation Turnaround Hours = 
+AVERAGE(fact_escalations[resolution_hours])

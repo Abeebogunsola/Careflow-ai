@@ -1,0 +1,434 @@
+appointment_key,client_key,date_key,appointment_type,status,location_label,is_completed,is_missed,is_scheduled,is_cancelled,is_rescheduled,scheduled_hour
+ANON-4FD4EBEE,ANON-229421A2,2026-08-02,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-DD39AF63,ANON-229421A2,2026-08-23,refill,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-2587C4A3,ANON-229421A2,2026-09-21,refill,scheduled,Community Health Center,0,0,1,0,0,9
+ANON-BD8F99C3,ANON-229421A2,2026-07-15,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,8
+ANON-19E196C4,ANON-118C6EFE,2026-08-25,refill,completed,Annex Clinic Room 4,1,0,0,0,0,10
+ANON-BB63BFB2,ANON-118C6EFE,2026-08-29,refill,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-3B73532C,ANON-118C6EFE,2026-09-21,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,5
+ANON-68D78D22,ANON-118C6EFE,2026-08-08,counseling,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-89D5C9B9,ANON-118C6EFE,2026-10-06,counseling,scheduled,Annex Clinic Room 4,0,0,1,0,0,12
+ANON-3D2A8B67,ANON-F5EC4FC5,2026-10-09,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,5
+ANON-E8C0A768,ANON-F5EC4FC5,2026-09-30,refill,scheduled,Community Health Center,0,0,1,0,0,8
+ANON-94826E42,ANON-F5EC4FC5,2026-07-12,counseling,missed,Main Clinic Suite A,0,1,0,0,0,6
+ANON-03F1C72B,ANON-F5EC4FC5,2026-06-22,counseling,completed,East Wing Outpatient,1,0,0,0,0,10
+ANON-734EF40F,ANON-F5EC4FC5,2026-10-13,counseling,scheduled,Main Clinic Suite A,0,0,1,0,0,9
+ANON-BF8D1092,ANON-F5EC4FC5,2026-07-18,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,5
+ANON-8D18430C,ANON-F9029CD0,2026-06-02,refill,completed,East Wing Outpatient,1,0,0,0,0,5
+ANON-71CFFC94,ANON-F9029CD0,2026-08-30,clinical_review,missed,Main Clinic Suite A,0,1,0,0,0,11
+ANON-96763172,ANON-F9029CD0,2026-07-20,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-0A169233,ANON-F9029CD0,2026-09-26,counseling,scheduled,Main Clinic Suite A,0,0,1,0,0,5
+ANON-534DE655,ANON-F9029CD0,2026-09-07,counseling,completed,Community Health Center,1,0,0,0,0,8
+ANON-4A6F9A5E,ANON-2C6607D4,2026-07-25,counseling,completed,Community Health Center,1,0,0,0,0,12
+ANON-69003410,ANON-2C6607D4,2026-06-04,refill,completed,Annex Clinic Room 4,1,0,0,0,0,11
+ANON-AD7FB463,ANON-2C6607D4,2026-10-13,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,4
+ANON-9B3138EB,ANON-C1359A00,2026-10-15,counseling,scheduled,Community Health Center,0,0,1,0,0,8
+ANON-D16534FA,ANON-C1359A00,2026-10-14,clinical_review,scheduled,Annex Clinic Room 4,0,0,1,0,0,12
+ANON-994F5A73,ANON-D0A0D3E8,2026-09-04,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-66BABDDA,ANON-D0A0D3E8,2026-09-26,clinical_review,scheduled,Annex Clinic Room 4,0,0,1,0,0,10
+ANON-D61FB5D8,ANON-56A53EF6,2026-07-22,refill,completed,Community Health Center,1,0,0,0,0,9
+ANON-09A49DCB,ANON-56A53EF6,2026-08-01,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-BE53940D,ANON-56A53EF6,2026-10-05,clinical_review,scheduled,Main Clinic Suite A,0,0,1,0,0,4
+ANON-14B6655A,ANON-56A53EF6,2026-09-21,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,12
+ANON-ACAC96D4,ANON-56A53EF6,2026-06-14,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-E4741EE3,ANON-56A53EF6,2026-06-28,lab_visit,missed,East Wing Outpatient,0,1,0,0,0,6
+ANON-62EC300A,ANON-257A18D7,2026-09-10,counseling,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-804E3BCF,ANON-257A18D7,2026-07-08,clinical_review,completed,Community Health Center,1,0,0,0,0,8
+ANON-4D20E41D,ANON-257A18D7,2026-09-30,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,4
+ANON-E42B9DC2,ANON-257A18D7,2026-08-08,lab_visit,completed,Community Health Center,1,0,0,0,0,9
+ANON-0FC9C5DD,ANON-257A18D7,2026-06-10,counseling,cancelled,Annex Clinic Room 4,0,0,0,1,0,4
+ANON-5950C2C7,ANON-257A18D7,2026-09-19,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,5
+ANON-FF38C69E,ANON-C70DECBE,2026-08-27,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-A2CCE633,ANON-C70DECBE,2026-06-26,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-F14E3477,ANON-C70DECBE,2026-07-04,refill,missed,Community Health Center,0,1,0,0,0,12
+ANON-C94BC4DC,ANON-C70DECBE,2026-09-28,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,5
+ANON-7E921D82,ANON-C70DECBE,2026-07-09,clinical_review,completed,Community Health Center,1,0,0,0,0,5
+ANON-C4639817,ANON-C70DECBE,2026-07-20,counseling,completed,Main Clinic Suite A,1,0,0,0,0,11
+ANON-51E6F537,ANON-669022AE,2026-07-14,counseling,rescheduled,Main Clinic Suite A,0,0,0,0,1,10
+ANON-E8E724C1,ANON-669022AE,2026-09-13,counseling,missed,Annex Clinic Room 4,0,1,0,0,0,10
+ANON-E2CF2064,ANON-669022AE,2026-09-20,counseling,scheduled,Community Health Center,0,0,1,0,0,6
+ANON-B9EBAD62,ANON-669022AE,2026-07-06,counseling,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-1ABE7E1A,ANON-308D95E0,2026-10-16,lab_visit,scheduled,Community Health Center,0,0,1,0,0,4
+ANON-3E6F0511,ANON-308D95E0,2026-07-28,clinical_review,missed,Annex Clinic Room 4,0,1,0,0,0,8
+ANON-CC60A7C2,ANON-308D95E0,2026-10-14,clinical_review,scheduled,Main Clinic Suite A,0,0,1,0,0,10
+ANON-5062A90F,ANON-308D95E0,2026-07-06,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,11
+ANON-5ECA8CF7,ANON-308D95E0,2026-09-06,counseling,completed,Community Health Center,1,0,0,0,0,6
+ANON-7A80FF25,ANON-AE0F568F,2026-09-30,clinical_review,scheduled,Annex Clinic Room 4,0,0,1,0,0,8
+ANON-5CBBD6E7,ANON-AE0F568F,2026-10-04,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,12
+ANON-83E34971,ANON-AE0F568F,2026-08-21,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-B5E87611,ANON-AE0F568F,2026-09-21,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,11
+ANON-206C9EBE,ANON-AE0F568F,2026-06-06,counseling,missed,Community Health Center,0,1,0,0,0,6
+ANON-9694A7BB,ANON-AE0F568F,2026-08-15,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-502288AA,ANON-D81449F9,2026-10-06,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,10
+ANON-9C1CADB4,ANON-D81449F9,2026-08-26,refill,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-B24D1BD1,ANON-D81449F9,2026-09-07,clinical_review,completed,Community Health Center,1,0,0,0,0,12
+ANON-262D98AD,ANON-D81449F9,2026-09-23,clinical_review,scheduled,Main Clinic Suite A,0,0,1,0,0,6
+ANON-40A554A4,ANON-3E35047E,2026-08-09,counseling,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-AF875D38,ANON-3E35047E,2026-06-28,counseling,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-A8A76316,ANON-3E35047E,2026-09-05,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-208D8348,ANON-C629E20A,2026-07-20,refill,missed,Community Health Center,0,1,0,0,0,9
+ANON-4A4BDF51,ANON-C629E20A,2026-06-10,clinical_review,missed,East Wing Outpatient,0,1,0,0,0,7
+ANON-E31974EC,ANON-C629E20A,2026-06-08,refill,cancelled,East Wing Outpatient,0,0,0,1,0,7
+ANON-A06EE44C,ANON-C629E20A,2026-06-25,lab_visit,cancelled,Main Clinic Suite A,0,0,0,1,0,7
+ANON-80703E0E,ANON-C629E20A,2026-06-25,refill,completed,Community Health Center,1,0,0,0,0,7
+ANON-51868CAF,ANON-C629E20A,2026-08-07,clinical_review,missed,Main Clinic Suite A,0,1,0,0,0,11
+ANON-1057BE81,ANON-AC5FAEAD,2026-09-06,refill,rescheduled,East Wing Outpatient,0,0,0,0,1,11
+ANON-168CB957,ANON-AC5FAEAD,2026-09-25,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,6
+ANON-1A6A5903,ANON-AC5FAEAD,2026-06-25,refill,completed,Community Health Center,1,0,0,0,0,9
+ANON-7743BFDF,ANON-AC5FAEAD,2026-09-17,lab_visit,completed,Community Health Center,1,0,0,0,0,4
+ANON-E4CF217D,ANON-AC5FAEAD,2026-09-12,clinical_review,completed,Community Health Center,1,0,0,0,0,7
+ANON-1C6D1632,ANON-AC5FAEAD,2026-09-26,refill,scheduled,Main Clinic Suite A,0,0,1,0,0,6
+ANON-1201DEBC,ANON-ED865047,2026-06-18,counseling,missed,Annex Clinic Room 4,0,1,0,0,0,12
+ANON-E1C007C2,ANON-ED865047,2026-10-14,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,4
+ANON-FF9703C2,ANON-A4179A7D,2026-07-30,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-826BBC41,ANON-A4179A7D,2026-07-13,refill,completed,Main Clinic Suite A,1,0,0,0,0,6
+ANON-5D686364,ANON-F576CF3C,2026-06-29,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,10
+ANON-02D59FB4,ANON-F576CF3C,2026-06-10,refill,rescheduled,Main Clinic Suite A,0,0,0,0,1,10
+ANON-6B3974E2,ANON-F576CF3C,2026-06-02,clinical_review,missed,Annex Clinic Room 4,0,1,0,0,0,7
+ANON-48E42795,ANON-F576CF3C,2026-06-20,lab_visit,missed,Main Clinic Suite A,0,1,0,0,0,11
+ANON-E208A0F7,ANON-F576CF3C,2026-06-29,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-D01DE790,ANON-F576CF3C,2026-10-18,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,4
+ANON-37130363,ANON-0F586A28,2026-08-05,refill,rescheduled,Community Health Center,0,0,0,0,1,4
+ANON-C641381E,ANON-0F586A28,2026-08-21,clinical_review,rescheduled,Main Clinic Suite A,0,0,0,0,1,12
+ANON-400EC977,ANON-D838387B,2026-07-06,refill,completed,Annex Clinic Room 4,1,0,0,0,0,12
+ANON-F53C343D,ANON-D838387B,2026-09-18,lab_visit,completed,Community Health Center,1,0,0,0,0,8
+ANON-5475CAC2,ANON-D838387B,2026-09-16,refill,missed,Community Health Center,0,1,0,0,0,5
+ANON-60863E1B,ANON-D838387B,2026-07-10,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,4
+ANON-CEA0207E,ANON-4DFAF53F,2026-09-29,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,5
+ANON-191F75B9,ANON-4DFAF53F,2026-10-10,clinical_review,scheduled,Annex Clinic Room 4,0,0,1,0,0,9
+ANON-5E2DBD54,ANON-4DFAF53F,2026-08-04,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,7
+ANON-84AD5A03,ANON-10A73A8B,2026-06-26,lab_visit,cancelled,Community Health Center,0,0,0,1,0,12
+ANON-842E4AED,ANON-10A73A8B,2026-09-20,lab_visit,scheduled,Community Health Center,0,0,1,0,0,4
+ANON-8BA12A92,ANON-10A73A8B,2026-09-19,refill,scheduled,Main Clinic Suite A,0,0,1,0,0,4
+ANON-DCB9EA83,ANON-10A73A8B,2026-10-19,counseling,scheduled,Annex Clinic Room 4,0,0,1,0,0,12
+ANON-1AAB0C7B,ANON-190F66DD,2026-09-03,refill,missed,East Wing Outpatient,0,1,0,0,0,6
+ANON-DD670D9A,ANON-190F66DD,2026-08-04,refill,completed,East Wing Outpatient,1,0,0,0,0,11
+ANON-99E41057,ANON-190F66DD,2026-08-24,counseling,rescheduled,Main Clinic Suite A,0,0,0,0,1,5
+ANON-AFAC4D35,ANON-37240C32,2026-06-29,counseling,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-93EECA3A,ANON-37240C32,2026-08-15,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,11
+ANON-A1033B40,ANON-37240C32,2026-07-26,refill,cancelled,East Wing Outpatient,0,0,0,1,0,6
+ANON-5E0895A8,ANON-37240C32,2026-06-23,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-A261E990,ANON-D62A6003,2026-07-16,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,7
+ANON-AF4BD19A,ANON-D62A6003,2026-08-31,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-E3EB750C,ANON-D62A6003,2026-10-04,lab_visit,scheduled,Community Health Center,0,0,1,0,0,5
+ANON-C3FA9244,ANON-EEDDAA47,2026-10-01,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,8
+ANON-D29DF236,ANON-EEDDAA47,2026-07-29,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-4D7057E8,ANON-EEDDAA47,2026-08-07,counseling,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-C9F18C8F,ANON-EEDDAA47,2026-09-21,lab_visit,scheduled,Annex Clinic Room 4,0,0,1,0,0,10
+ANON-A25AB282,ANON-B0A242FC,2026-09-09,lab_visit,missed,Main Clinic Suite A,0,1,0,0,0,5
+ANON-2F5AA9BA,ANON-B0A242FC,2026-10-01,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,5
+ANON-E7249E5E,ANON-B0A242FC,2026-07-14,counseling,completed,Main Clinic Suite A,1,0,0,0,0,8
+ANON-C3D7EA91,ANON-B0A242FC,2026-08-15,refill,completed,Main Clinic Suite A,1,0,0,0,0,8
+ANON-B4CE1111,ANON-8F01DEB0,2026-08-07,refill,completed,Main Clinic Suite A,1,0,0,0,0,6
+ANON-E1818A7B,ANON-8F01DEB0,2026-07-27,counseling,completed,East Wing Outpatient,1,0,0,0,0,4
+ANON-07C8C62E,ANON-8F01DEB0,2026-07-04,refill,cancelled,East Wing Outpatient,0,0,0,1,0,4
+ANON-2D39571C,ANON-8F01DEB0,2026-10-04,lab_visit,scheduled,Community Health Center,0,0,1,0,0,9
+ANON-46458263,ANON-8F01DEB0,2026-09-03,refill,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-3C8A9BAD,ANON-8F01DEB0,2026-10-03,lab_visit,scheduled,Annex Clinic Room 4,0,0,1,0,0,11
+ANON-1AA9CB73,ANON-D6F5144C,2026-09-25,counseling,scheduled,Main Clinic Suite A,0,0,1,0,0,12
+ANON-FC04C10C,ANON-D6F5144C,2026-06-19,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,5
+ANON-5CF2B7C5,ANON-D6F5144C,2026-08-04,refill,completed,Community Health Center,1,0,0,0,0,9
+ANON-A8455521,ANON-D6F5144C,2026-08-28,refill,rescheduled,East Wing Outpatient,0,0,0,0,1,7
+ANON-78C04EDA,ANON-D6F5144C,2026-09-27,refill,scheduled,East Wing Outpatient,0,0,1,0,0,8
+ANON-861FCF74,ANON-D6F5144C,2026-06-17,refill,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-2F7E333C,ANON-15D3B0A2,2026-06-18,lab_visit,missed,Annex Clinic Room 4,0,1,0,0,0,11
+ANON-E1935EFD,ANON-15D3B0A2,2026-10-05,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,7
+ANON-E8503060,ANON-15D3B0A2,2026-08-14,refill,cancelled,East Wing Outpatient,0,0,0,1,0,12
+ANON-81D15B23,ANON-15D3B0A2,2026-09-16,clinical_review,completed,Community Health Center,1,0,0,0,0,12
+ANON-0BE2EECF,ANON-15D3B0A2,2026-06-05,clinical_review,missed,East Wing Outpatient,0,1,0,0,0,4
+ANON-975F02E7,ANON-A811C0D7,2026-07-18,refill,completed,Annex Clinic Room 4,1,0,0,0,0,9
+ANON-BE0B750E,ANON-A811C0D7,2026-07-26,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,11
+ANON-B58D6FE5,ANON-A811C0D7,2026-07-21,lab_visit,missed,Community Health Center,0,1,0,0,0,7
+ANON-2A37AC33,ANON-A811C0D7,2026-10-12,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,6
+ANON-40166F33,ANON-A811C0D7,2026-06-01,clinical_review,rescheduled,Community Health Center,0,0,0,0,1,11
+ANON-53842254,ANON-A811C0D7,2026-09-15,counseling,cancelled,East Wing Outpatient,0,0,0,1,0,9
+ANON-F06DAB5E,ANON-085C3C3A,2026-10-18,refill,scheduled,East Wing Outpatient,0,0,1,0,0,7
+ANON-27CED571,ANON-085C3C3A,2026-09-03,counseling,missed,Annex Clinic Room 4,0,1,0,0,0,11
+ANON-1BBBC6D6,ANON-12F7F8D7,2026-10-11,clinical_review,scheduled,Community Health Center,0,0,1,0,0,11
+ANON-E050E994,ANON-12F7F8D7,2026-09-21,counseling,scheduled,Main Clinic Suite A,0,0,1,0,0,5
+ANON-A2E7FA34,ANON-12F7F8D7,2026-10-03,clinical_review,scheduled,Annex Clinic Room 4,0,0,1,0,0,5
+ANON-D548BD37,ANON-36C7D3F1,2026-07-19,counseling,completed,Community Health Center,1,0,0,0,0,11
+ANON-97B1D9F5,ANON-36C7D3F1,2026-07-17,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,4
+ANON-8B63B9CF,ANON-36C7D3F1,2026-08-08,refill,completed,Community Health Center,1,0,0,0,0,8
+ANON-DFFD2127,ANON-36C7D3F1,2026-08-07,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-260D3ABC,ANON-14A907F1,2026-09-11,counseling,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-7A1FF703,ANON-14A907F1,2026-10-18,clinical_review,scheduled,Main Clinic Suite A,0,0,1,0,0,6
+ANON-5D849EE0,ANON-564B9C41,2026-07-17,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-95FBA49F,ANON-564B9C41,2026-06-04,refill,missed,Annex Clinic Room 4,0,1,0,0,0,7
+ANON-2E5B9868,ANON-564B9C41,2026-08-02,refill,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-6341DEBA,ANON-564B9C41,2026-09-15,counseling,completed,Community Health Center,1,0,0,0,0,12
+ANON-11C09BC5,ANON-564B9C41,2026-06-23,counseling,completed,Community Health Center,1,0,0,0,0,11
+ANON-FABE98F1,ANON-21609F5B,2026-10-02,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,11
+ANON-80FCADBE,ANON-21609F5B,2026-07-10,counseling,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-D7F09D3F,ANON-21609F5B,2026-09-06,clinical_review,completed,Community Health Center,1,0,0,0,0,4
+ANON-DB6334A8,ANON-21609F5B,2026-07-07,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,9
+ANON-71063CE5,ANON-21609F5B,2026-08-30,lab_visit,completed,Community Health Center,1,0,0,0,0,11
+ANON-2311828A,ANON-21609F5B,2026-07-24,refill,completed,Community Health Center,1,0,0,0,0,11
+ANON-CFBA7626,ANON-90348246,2026-07-24,lab_visit,rescheduled,East Wing Outpatient,0,0,0,0,1,6
+ANON-CA73FEDB,ANON-90348246,2026-08-20,lab_visit,completed,Community Health Center,1,0,0,0,0,10
+ANON-0262B4A1,ANON-90348246,2026-06-05,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-5C8AE10D,ANON-90348246,2026-06-04,refill,completed,East Wing Outpatient,1,0,0,0,0,10
+ANON-FAA5918A,ANON-90348246,2026-10-13,counseling,scheduled,East Wing Outpatient,0,0,1,0,0,5
+ANON-1D8534C8,ANON-CE864168,2026-10-06,clinical_review,scheduled,Main Clinic Suite A,0,0,1,0,0,8
+ANON-24168BC7,ANON-CE864168,2026-08-02,counseling,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-30606BDF,ANON-CE864168,2026-06-13,lab_visit,missed,Annex Clinic Room 4,0,1,0,0,0,11
+ANON-0B419E1F,ANON-CE864168,2026-07-02,refill,completed,East Wing Outpatient,1,0,0,0,0,9
+ANON-23CEA19C,ANON-0253700F,2026-06-03,lab_visit,missed,Annex Clinic Room 4,0,1,0,0,0,10
+ANON-930B6C6E,ANON-0253700F,2026-07-14,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-85F5D7E9,ANON-0253700F,2026-07-11,counseling,completed,Main Clinic Suite A,1,0,0,0,0,11
+ANON-48933B36,ANON-0253700F,2026-09-28,counseling,scheduled,Annex Clinic Room 4,0,0,1,0,0,10
+ANON-3B6E94B1,ANON-0253700F,2026-09-08,counseling,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-AB4FDA29,ANON-0253700F,2026-06-19,counseling,completed,East Wing Outpatient,1,0,0,0,0,5
+ANON-4C3035AF,ANON-93570E71,2026-09-18,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,10
+ANON-4BD89548,ANON-93570E71,2026-06-28,clinical_review,completed,Community Health Center,1,0,0,0,0,11
+ANON-87521EC0,ANON-93570E71,2026-08-06,refill,completed,Community Health Center,1,0,0,0,0,4
+ANON-3E2CB92F,ANON-93570E71,2026-06-09,clinical_review,missed,Annex Clinic Room 4,0,1,0,0,0,8
+ANON-3F4518B1,ANON-93570E71,2026-09-21,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,10
+ANON-A6D1A6A4,ANON-93570E71,2026-06-09,refill,missed,East Wing Outpatient,0,1,0,0,0,6
+ANON-2571452D,ANON-DB027207,2026-08-11,refill,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-E79D191C,ANON-DB027207,2026-09-21,lab_visit,scheduled,Annex Clinic Room 4,0,0,1,0,0,6
+ANON-6C8CE620,ANON-DB027207,2026-07-10,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,12
+ANON-CDD92DDB,ANON-DB027207,2026-10-07,clinical_review,scheduled,Community Health Center,0,0,1,0,0,11
+ANON-0365752E,ANON-DB027207,2026-09-19,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,10
+ANON-73AB56E7,ANON-6D560816,2026-08-28,counseling,rescheduled,Main Clinic Suite A,0,0,0,0,1,8
+ANON-942AC214,ANON-6D560816,2026-06-14,clinical_review,completed,Community Health Center,1,0,0,0,0,5
+ANON-9B95887A,ANON-6D560816,2026-07-28,refill,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-7E99F2E2,ANON-B8B69EEC,2026-07-23,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-46F78026,ANON-B8B69EEC,2026-07-16,refill,completed,Community Health Center,1,0,0,0,0,9
+ANON-06920B64,ANON-B8B69EEC,2026-06-12,counseling,missed,Main Clinic Suite A,0,1,0,0,0,12
+ANON-6CDD4BBD,ANON-B8B69EEC,2026-08-10,lab_visit,missed,Main Clinic Suite A,0,1,0,0,0,7
+ANON-75446275,ANON-9952019B,2026-08-22,clinical_review,rescheduled,East Wing Outpatient,0,0,0,0,1,9
+ANON-DC5FD2A3,ANON-9952019B,2026-07-20,refill,missed,Community Health Center,0,1,0,0,0,6
+ANON-34AE6E53,ANON-9952019B,2026-07-01,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,8
+ANON-3EC4E293,ANON-2C582F5D,2026-07-14,counseling,missed,Community Health Center,0,1,0,0,0,7
+ANON-067A03BB,ANON-2C582F5D,2026-07-29,lab_visit,missed,Main Clinic Suite A,0,1,0,0,0,11
+ANON-8236B28C,ANON-E72A5E9D,2026-06-25,counseling,completed,Community Health Center,1,0,0,0,0,5
+ANON-AACEB135,ANON-E72A5E9D,2026-09-17,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,11
+ANON-41339A4A,ANON-F5FE7D5B,2026-09-27,lab_visit,scheduled,Community Health Center,0,0,1,0,0,5
+ANON-645567B6,ANON-F5FE7D5B,2026-07-27,counseling,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-5D8E7EB2,ANON-F5FE7D5B,2026-06-18,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-CF0F4D66,ANON-F5FE7D5B,2026-08-28,refill,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-DF5FF867,ANON-F5FE7D5B,2026-06-18,lab_visit,missed,Annex Clinic Room 4,0,1,0,0,0,9
+ANON-454008F1,ANON-F5FE7D5B,2026-08-07,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,9
+ANON-D92496BA,ANON-1C01F1D3,2026-09-14,clinical_review,missed,Community Health Center,0,1,0,0,0,5
+ANON-00F704A9,ANON-1C01F1D3,2026-09-05,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,5
+ANON-35E99572,ANON-1C01F1D3,2026-08-31,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,10
+ANON-2B42B81D,ANON-7A21B250,2026-09-14,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,11
+ANON-1C579B23,ANON-7A21B250,2026-06-02,clinical_review,rescheduled,Main Clinic Suite A,0,0,0,0,1,8
+ANON-C42E295B,ANON-7A21B250,2026-08-25,refill,completed,Community Health Center,1,0,0,0,0,7
+ANON-4EC7E280,ANON-7A21B250,2026-06-12,refill,completed,East Wing Outpatient,1,0,0,0,0,10
+ANON-B846046A,ANON-04657C65,2026-08-22,counseling,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-BD2DE495,ANON-04657C65,2026-07-20,clinical_review,completed,Community Health Center,1,0,0,0,0,5
+ANON-C29ED49C,ANON-9CA20B0F,2026-09-10,lab_visit,missed,East Wing Outpatient,0,1,0,0,0,7
+ANON-82716209,ANON-9CA20B0F,2026-07-24,counseling,completed,East Wing Outpatient,1,0,0,0,0,9
+ANON-A9734C00,ANON-9CA20B0F,2026-08-23,refill,completed,Community Health Center,1,0,0,0,0,7
+ANON-4FB4ED46,ANON-9CA20B0F,2026-07-12,clinical_review,cancelled,Community Health Center,0,0,0,1,0,10
+ANON-4CC22AA2,ANON-9CA20B0F,2026-06-12,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-5F620927,ANON-29CF1308,2026-07-09,refill,missed,East Wing Outpatient,0,1,0,0,0,8
+ANON-41779D7C,ANON-29CF1308,2026-07-13,lab_visit,completed,Community Health Center,1,0,0,0,0,4
+ANON-75AAB892,ANON-29CF1308,2026-09-01,refill,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-FF287171,ANON-29CF1308,2026-08-31,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-F018E9DD,ANON-CECCA29F,2026-08-01,lab_visit,missed,Main Clinic Suite A,0,1,0,0,0,11
+ANON-94F9656B,ANON-CECCA29F,2026-06-14,counseling,rescheduled,Main Clinic Suite A,0,0,0,0,1,8
+ANON-23868DA8,ANON-CECCA29F,2026-09-22,refill,scheduled,Main Clinic Suite A,0,0,1,0,0,9
+ANON-18F82D8F,ANON-CECCA29F,2026-06-18,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,9
+ANON-E5F37A0D,ANON-3ED1BF95,2026-08-03,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,9
+ANON-4913B288,ANON-3ED1BF95,2026-09-16,clinical_review,missed,Community Health Center,0,1,0,0,0,7
+ANON-108F904C,ANON-3ED1BF95,2026-08-03,refill,completed,Annex Clinic Room 4,1,0,0,0,0,9
+ANON-6AA69F94,ANON-3ED1BF95,2026-10-14,lab_visit,scheduled,Annex Clinic Room 4,0,0,1,0,0,7
+ANON-64A9CC5B,ANON-3ED1BF95,2026-08-14,refill,completed,Community Health Center,1,0,0,0,0,7
+ANON-AEBF5392,ANON-6AB59ABB,2026-09-26,counseling,scheduled,Annex Clinic Room 4,0,0,1,0,0,5
+ANON-88506381,ANON-6AB59ABB,2026-06-27,lab_visit,cancelled,Annex Clinic Room 4,0,0,0,1,0,9
+ANON-9F1965F3,ANON-6AB59ABB,2026-08-17,refill,completed,Annex Clinic Room 4,1,0,0,0,0,12
+ANON-3F781384,ANON-7EB9DA7F,2026-09-07,counseling,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-7D79085B,ANON-7EB9DA7F,2026-07-30,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-CB04370F,ANON-7EB9DA7F,2026-07-13,refill,completed,Main Clinic Suite A,1,0,0,0,0,4
+ANON-99D74B2B,ANON-7EB9DA7F,2026-07-08,clinical_review,completed,Community Health Center,1,0,0,0,0,7
+ANON-327AA819,ANON-7EB9DA7F,2026-08-08,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-DB464DCC,ANON-D7F2B068,2026-07-07,counseling,completed,Community Health Center,1,0,0,0,0,10
+ANON-E08DB527,ANON-D7F2B068,2026-08-03,refill,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-892C4C09,ANON-D7F2B068,2026-08-11,counseling,completed,Community Health Center,1,0,0,0,0,9
+ANON-B9D669ED,ANON-D7F2B068,2026-08-01,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,11
+ANON-6B390102,ANON-D7F2B068,2026-08-01,refill,completed,East Wing Outpatient,1,0,0,0,0,4
+ANON-AC02A057,ANON-D7F2B068,2026-07-31,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,10
+ANON-2CA27DC1,ANON-985F0AAE,2026-07-21,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-6D564B4D,ANON-985F0AAE,2026-08-13,counseling,missed,Annex Clinic Room 4,0,1,0,0,0,12
+ANON-E4BBAAD1,ANON-985F0AAE,2026-08-22,clinical_review,missed,East Wing Outpatient,0,1,0,0,0,6
+ANON-898AD658,ANON-985F0AAE,2026-07-30,refill,missed,Main Clinic Suite A,0,1,0,0,0,6
+ANON-EB14AD6F,ANON-985F0AAE,2026-07-31,refill,completed,Annex Clinic Room 4,1,0,0,0,0,12
+ANON-C1E4F94A,ANON-985F0AAE,2026-06-25,counseling,completed,Main Clinic Suite A,1,0,0,0,0,11
+ANON-0F9007CB,ANON-105DFA8F,2026-06-29,counseling,completed,Community Health Center,1,0,0,0,0,10
+ANON-5A9FEEBB,ANON-105DFA8F,2026-06-30,lab_visit,missed,East Wing Outpatient,0,1,0,0,0,9
+ANON-4BB92A4E,ANON-FB1C4ACC,2026-08-02,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-0623F9C9,ANON-FB1C4ACC,2026-08-22,clinical_review,missed,Main Clinic Suite A,0,1,0,0,0,12
+ANON-4AFA59F5,ANON-FB1C4ACC,2026-07-23,clinical_review,completed,Community Health Center,1,0,0,0,0,11
+ANON-863C5C0C,ANON-2D4256AA,2026-08-21,refill,cancelled,Main Clinic Suite A,0,0,0,1,0,6
+ANON-95A69E89,ANON-2D4256AA,2026-08-03,refill,completed,Main Clinic Suite A,1,0,0,0,0,6
+ANON-B7ABD424,ANON-2D4256AA,2026-09-08,counseling,completed,Community Health Center,1,0,0,0,0,8
+ANON-64CD3AA2,ANON-2D4256AA,2026-09-28,clinical_review,scheduled,Community Health Center,0,0,1,0,0,9
+ANON-87392945,ANON-2D4256AA,2026-10-11,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,9
+ANON-D6DD57C6,ANON-2D4256AA,2026-07-03,counseling,completed,Community Health Center,1,0,0,0,0,12
+ANON-0503E733,ANON-EFBC8C51,2026-07-08,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-18900558,ANON-EFBC8C51,2026-06-29,clinical_review,missed,Community Health Center,0,1,0,0,0,6
+ANON-15362AD7,ANON-EFBC8C51,2026-09-11,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,5
+ANON-1A6CEE0F,ANON-EFBC8C51,2026-07-12,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,9
+ANON-8F59BC40,ANON-6731A8FF,2026-07-30,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,9
+ANON-2287CF68,ANON-6731A8FF,2026-09-24,clinical_review,scheduled,Main Clinic Suite A,0,0,1,0,0,4
+ANON-3FF26E62,ANON-6731A8FF,2026-09-30,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,8
+ANON-65E12DA0,ANON-6731A8FF,2026-09-30,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,8
+ANON-2C5D6731,ANON-6731A8FF,2026-07-10,clinical_review,missed,Main Clinic Suite A,0,1,0,0,0,7
+ANON-3948B0DC,ANON-5A25B632,2026-07-23,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-A701F21A,ANON-5A25B632,2026-08-03,counseling,completed,Community Health Center,1,0,0,0,0,11
+ANON-16638000,ANON-5A25B632,2026-07-11,counseling,rescheduled,Community Health Center,0,0,0,0,1,6
+ANON-22A47809,ANON-5A25B632,2026-06-22,refill,cancelled,Annex Clinic Room 4,0,0,0,1,0,11
+ANON-18F808C7,ANON-5A25B632,2026-07-07,counseling,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-54C3416B,ANON-5A25B632,2026-08-05,lab_visit,missed,Main Clinic Suite A,0,1,0,0,0,4
+ANON-E68D9142,ANON-1261A2DA,2026-08-18,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,7
+ANON-459CC2E3,ANON-1261A2DA,2026-09-11,lab_visit,completed,Community Health Center,1,0,0,0,0,4
+ANON-2C31264D,ANON-5F8B5D8C,2026-08-26,refill,missed,Main Clinic Suite A,0,1,0,0,0,9
+ANON-A006544F,ANON-5F8B5D8C,2026-06-17,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,7
+ANON-F095BA09,ANON-5F8B5D8C,2026-06-08,counseling,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-395129C9,ANON-5F8B5D8C,2026-06-09,counseling,rescheduled,East Wing Outpatient,0,0,0,0,1,4
+ANON-F4A4E191,ANON-5F8B5D8C,2026-06-04,counseling,completed,East Wing Outpatient,1,0,0,0,0,7
+ANON-5C025C42,ANON-9EAD11D8,2026-06-14,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-3B8ECC18,ANON-9EAD11D8,2026-07-26,refill,rescheduled,Annex Clinic Room 4,0,0,0,0,1,7
+ANON-C607CBF4,ANON-9EAD11D8,2026-09-10,lab_visit,completed,Community Health Center,1,0,0,0,0,9
+ANON-99F5EA3A,ANON-9EAD11D8,2026-06-23,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,9
+ANON-C0D39C73,ANON-BAB0DDB8,2026-08-18,counseling,missed,East Wing Outpatient,0,1,0,0,0,5
+ANON-99A37638,ANON-BAB0DDB8,2026-08-15,refill,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-0B295A05,ANON-BAB0DDB8,2026-07-19,refill,completed,Main Clinic Suite A,1,0,0,0,0,5
+ANON-5862861A,ANON-BAB0DDB8,2026-06-16,clinical_review,missed,Main Clinic Suite A,0,1,0,0,0,10
+ANON-5DCB7D55,ANON-BAB0DDB8,2026-10-10,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,7
+ANON-93EC6458,ANON-BAB0DDB8,2026-07-19,refill,missed,Main Clinic Suite A,0,1,0,0,0,6
+ANON-DF8CF796,ANON-54153672,2026-06-30,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-759EC90A,ANON-54153672,2026-09-12,counseling,missed,Community Health Center,0,1,0,0,0,4
+ANON-3452F6CC,ANON-54153672,2026-06-03,lab_visit,completed,Community Health Center,1,0,0,0,0,10
+ANON-6756A3D2,ANON-54153672,2026-06-05,lab_visit,completed,Community Health Center,1,0,0,0,0,4
+ANON-BA7683CE,ANON-54153672,2026-09-20,lab_visit,scheduled,Annex Clinic Room 4,0,0,1,0,0,11
+ANON-D479D7EE,ANON-D306F22F,2026-09-19,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,7
+ANON-DB122FA1,ANON-D306F22F,2026-07-20,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-8806CB1A,ANON-D306F22F,2026-09-10,refill,cancelled,Annex Clinic Room 4,0,0,0,1,0,11
+ANON-7FC3B8EC,ANON-D306F22F,2026-09-14,clinical_review,missed,Annex Clinic Room 4,0,1,0,0,0,7
+ANON-85CF117C,ANON-D306F22F,2026-09-08,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,12
+ANON-DFED2F13,ANON-CB97880C,2026-08-25,refill,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-D86B823A,ANON-CB97880C,2026-10-07,counseling,scheduled,Community Health Center,0,0,1,0,0,8
+ANON-0BC81338,ANON-2F5A2531,2026-07-12,lab_visit,completed,Community Health Center,1,0,0,0,0,11
+ANON-52267595,ANON-2F5A2531,2026-06-10,lab_visit,completed,Community Health Center,1,0,0,0,0,6
+ANON-13B021B1,ANON-2F5A2531,2026-06-15,counseling,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-8D9466A7,ANON-2F5A2531,2026-06-26,refill,completed,East Wing Outpatient,1,0,0,0,0,7
+ANON-4D0E592E,ANON-2F5A2531,2026-10-09,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,9
+ANON-CADF9C83,ANON-A1989BED,2026-09-29,refill,scheduled,East Wing Outpatient,0,0,1,0,0,5
+ANON-F1DBC68F,ANON-A1989BED,2026-08-16,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,11
+ANON-8DD86413,ANON-A1989BED,2026-09-24,refill,scheduled,Community Health Center,0,0,1,0,0,9
+ANON-67D5DCEA,ANON-A1989BED,2026-09-11,refill,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-8D2E8EAD,ANON-A1989BED,2026-09-01,refill,completed,Main Clinic Suite A,1,0,0,0,0,8
+ANON-60992A40,ANON-B1B7A1AF,2026-06-04,refill,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-EAF2ADB3,ANON-B1B7A1AF,2026-06-30,counseling,rescheduled,Community Health Center,0,0,0,0,1,7
+ANON-1B929519,ANON-B1B7A1AF,2026-09-05,counseling,completed,Community Health Center,1,0,0,0,0,11
+ANON-56BACA2D,ANON-B1B7A1AF,2026-07-14,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,8
+ANON-758FA364,ANON-B1B7A1AF,2026-08-27,refill,completed,East Wing Outpatient,1,0,0,0,0,4
+ANON-B967425F,ANON-B1B7A1AF,2026-08-31,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,9
+ANON-4F402414,ANON-6F4263F5,2026-09-09,clinical_review,missed,Annex Clinic Room 4,0,1,0,0,0,5
+ANON-D6DFBF6C,ANON-6F4263F5,2026-06-18,refill,completed,East Wing Outpatient,1,0,0,0,0,10
+ANON-8CF50E2A,ANON-6F4263F5,2026-07-17,counseling,missed,Main Clinic Suite A,0,1,0,0,0,12
+ANON-C575E9D4,ANON-6F4263F5,2026-08-15,refill,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-A3F4A2B6,ANON-6F4263F5,2026-10-06,counseling,scheduled,Community Health Center,0,0,1,0,0,9
+ANON-6F4174C2,ANON-A3A35DB8,2026-09-26,clinical_review,scheduled,Main Clinic Suite A,0,0,1,0,0,7
+ANON-48F0D08F,ANON-A3A35DB8,2026-07-04,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-76136A3D,ANON-A3A35DB8,2026-06-02,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,5
+ANON-AD8FB6C2,ANON-A3A35DB8,2026-08-07,clinical_review,missed,Annex Clinic Room 4,0,1,0,0,0,11
+ANON-D7C06C65,ANON-A3A35DB8,2026-08-23,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,5
+ANON-C7259FA9,ANON-A3A35DB8,2026-06-21,lab_visit,cancelled,East Wing Outpatient,0,0,0,1,0,8
+ANON-2A411DA7,ANON-FF0A02EA,2026-10-09,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,9
+ANON-555DBB2D,ANON-FF0A02EA,2026-08-29,counseling,completed,East Wing Outpatient,1,0,0,0,0,11
+ANON-0DF58D90,ANON-29503A7E,2026-10-18,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,12
+ANON-57ECE7A3,ANON-29503A7E,2026-10-02,counseling,scheduled,Annex Clinic Room 4,0,0,1,0,0,6
+ANON-CEAD5955,ANON-D72F4E32,2026-08-29,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-9E9E380B,ANON-D72F4E32,2026-08-10,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-65AE9865,ANON-30964B73,2026-07-04,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-5C91D2A4,ANON-30964B73,2026-08-04,clinical_review,missed,Main Clinic Suite A,0,1,0,0,0,6
+ANON-BF8D58FB,ANON-30964B73,2026-09-30,refill,scheduled,Community Health Center,0,0,1,0,0,6
+ANON-760E1B72,ANON-30964B73,2026-08-07,counseling,cancelled,Community Health Center,0,0,0,1,0,11
+ANON-248D9F22,ANON-30964B73,2026-06-25,clinical_review,missed,East Wing Outpatient,0,1,0,0,0,7
+ANON-83585397,ANON-30964B73,2026-08-20,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-18690E5A,ANON-18C9A782,2026-07-09,lab_visit,completed,Main Clinic Suite A,1,0,0,0,0,9
+ANON-9981A7F6,ANON-18C9A782,2026-07-23,clinical_review,completed,Community Health Center,1,0,0,0,0,11
+ANON-1A31FED2,ANON-18C9A782,2026-08-06,counseling,completed,Community Health Center,1,0,0,0,0,9
+ANON-5E275EC5,ANON-18C9A782,2026-07-26,clinical_review,missed,Main Clinic Suite A,0,1,0,0,0,11
+ANON-49451316,ANON-7855A88B,2026-09-26,clinical_review,scheduled,East Wing Outpatient,0,0,1,0,0,10
+ANON-CD919990,ANON-7855A88B,2026-06-18,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,9
+ANON-F508E945,ANON-7855A88B,2026-08-12,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-C3F73391,ANON-431E4655,2026-06-03,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-60DCC1B6,ANON-431E4655,2026-07-07,counseling,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-5FF7CEBE,ANON-431E4655,2026-09-28,counseling,scheduled,East Wing Outpatient,0,0,1,0,0,5
+ANON-AF5E3F35,ANON-431E4655,2026-06-16,refill,completed,East Wing Outpatient,1,0,0,0,0,11
+ANON-4BC842A6,ANON-431E4655,2026-06-08,refill,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-2F59C8A7,ANON-431E4655,2026-08-15,lab_visit,cancelled,Annex Clinic Room 4,0,0,0,1,0,4
+ANON-9363DB82,ANON-BBE7E098,2026-07-16,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,5
+ANON-25A70FD8,ANON-BBE7E098,2026-09-08,refill,completed,Community Health Center,1,0,0,0,0,12
+ANON-4AB73851,ANON-BBE7E098,2026-08-10,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,4
+ANON-E7A62178,ANON-BBE7E098,2026-07-27,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,9
+ANON-A0F47FEB,ANON-BBE7E098,2026-08-16,refill,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-6930D8C2,ANON-1816E093,2026-07-01,lab_visit,missed,Annex Clinic Room 4,0,1,0,0,0,11
+ANON-0DFB0A95,ANON-1816E093,2026-06-26,counseling,missed,Community Health Center,0,1,0,0,0,10
+ANON-5068E6B1,ANON-1816E093,2026-06-21,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-FFC3C9D8,ANON-1816E093,2026-08-26,refill,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-1BA5E9D5,ANON-1816E093,2026-07-14,counseling,completed,Community Health Center,1,0,0,0,0,11
+ANON-CF5213EC,ANON-BF046FF9,2026-09-26,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,9
+ANON-E91EAD3B,ANON-BF046FF9,2026-08-04,refill,cancelled,East Wing Outpatient,0,0,0,1,0,8
+ANON-2F2A4637,ANON-BF046FF9,2026-07-24,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,12
+ANON-CD9040ED,ANON-EDE456D2,2026-09-22,counseling,scheduled,East Wing Outpatient,0,0,1,0,0,7
+ANON-683B1F47,ANON-EDE456D2,2026-06-04,lab_visit,completed,Community Health Center,1,0,0,0,0,8
+ANON-9012C5FB,ANON-EDE456D2,2026-08-27,refill,completed,Annex Clinic Room 4,1,0,0,0,0,12
+ANON-5C5358A2,ANON-EDE456D2,2026-07-09,counseling,completed,Community Health Center,1,0,0,0,0,8
+ANON-D6715854,ANON-EDE456D2,2026-06-30,lab_visit,missed,East Wing Outpatient,0,1,0,0,0,6
+ANON-56E7CF9C,ANON-0778DF09,2026-07-25,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-D2ADCD39,ANON-0778DF09,2026-06-01,refill,completed,Main Clinic Suite A,1,0,0,0,0,8
+ANON-DFB2E800,ANON-0778DF09,2026-09-21,lab_visit,scheduled,Community Health Center,0,0,1,0,0,4
+ANON-FE739DCB,ANON-0778DF09,2026-08-07,clinical_review,completed,Community Health Center,1,0,0,0,0,8
+ANON-0C6222EB,ANON-BB99AA30,2026-09-22,counseling,scheduled,Annex Clinic Room 4,0,0,1,0,0,9
+ANON-C9A54F7B,ANON-BB99AA30,2026-07-07,clinical_review,completed,Community Health Center,1,0,0,0,0,10
+ANON-84542DEA,ANON-BB99AA30,2026-08-18,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,4
+ANON-B1BCBED3,ANON-BB99AA30,2026-08-22,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,12
+ANON-CE2B9FDE,ANON-BB99AA30,2026-09-06,counseling,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-618343DC,ANON-BB99AA30,2026-09-19,refill,scheduled,Main Clinic Suite A,0,0,1,0,0,7
+ANON-8D05B0EE,ANON-66E054AB,2026-09-26,lab_visit,scheduled,Main Clinic Suite A,0,0,1,0,0,8
+ANON-2CF9D2F2,ANON-66E054AB,2026-06-13,lab_visit,rescheduled,Annex Clinic Room 4,0,0,0,0,1,12
+ANON-6446AEED,ANON-66E054AB,2026-06-04,refill,completed,Community Health Center,1,0,0,0,0,6
+ANON-496E53DB,ANON-66E054AB,2026-08-28,counseling,completed,Community Health Center,1,0,0,0,0,9
+ANON-26E4D36A,ANON-66E054AB,2026-07-12,lab_visit,completed,Community Health Center,1,0,0,0,0,10
+ANON-4E8736DA,ANON-66E054AB,2026-07-14,clinical_review,completed,Community Health Center,1,0,0,0,0,10
+ANON-42DA0283,ANON-983C6893,2026-09-17,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,9
+ANON-263DC655,ANON-983C6893,2026-09-15,counseling,completed,East Wing Outpatient,1,0,0,0,0,8
+ANON-3C5E0326,ANON-983C6893,2026-06-23,lab_visit,cancelled,Community Health Center,0,0,0,1,0,7
+ANON-4D535002,ANON-983C6893,2026-10-15,lab_visit,scheduled,Community Health Center,0,0,1,0,0,5
+ANON-18142520,ANON-92EA9DA3,2026-07-18,lab_visit,completed,Annex Clinic Room 4,1,0,0,0,0,11
+ANON-30612BC7,ANON-92EA9DA3,2026-07-06,refill,missed,Annex Clinic Room 4,0,1,0,0,0,11
+ANON-317655C9,ANON-92EA9DA3,2026-10-09,refill,scheduled,Community Health Center,0,0,1,0,0,8
+ANON-0D57A0EA,ANON-92EA9DA3,2026-08-31,counseling,missed,East Wing Outpatient,0,1,0,0,0,7
+ANON-96DC8CE3,ANON-92EA9DA3,2026-08-04,counseling,completed,Main Clinic Suite A,1,0,0,0,0,11
+ANON-256D287B,ANON-3FB07148,2026-10-12,lab_visit,scheduled,East Wing Outpatient,0,0,1,0,0,12
+ANON-44285E3B,ANON-3FB07148,2026-06-22,refill,completed,Annex Clinic Room 4,1,0,0,0,0,7
+ANON-91A91AA1,ANON-3FB07148,2026-08-30,lab_visit,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-A0FFF36A,ANON-3FB07148,2026-06-03,clinical_review,completed,Community Health Center,1,0,0,0,0,9
+ANON-824F6DAA,ANON-3FB07148,2026-06-23,refill,rescheduled,Annex Clinic Room 4,0,0,0,0,1,7
+ANON-EE0D6052,ANON-3FB07148,2026-07-30,counseling,completed,Main Clinic Suite A,1,0,0,0,0,7
+ANON-3EED52AE,ANON-2A0C6EA3,2026-06-04,lab_visit,completed,Community Health Center,1,0,0,0,0,11
+ANON-35BACE47,ANON-2A0C6EA3,2026-10-17,counseling,scheduled,East Wing Outpatient,0,0,1,0,0,5
+ANON-E64C4E29,ANON-2A0C6EA3,2026-09-13,clinical_review,completed,Community Health Center,1,0,0,0,0,8
+ANON-29417CB7,ANON-2A0C6EA3,2026-08-28,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,9
+ANON-0EF1A683,ANON-2A0C6EA3,2026-10-06,clinical_review,scheduled,Annex Clinic Room 4,0,0,1,0,0,10
+ANON-9A456CA2,ANON-2A0C6EA3,2026-07-16,counseling,completed,Community Health Center,1,0,0,0,0,7
+ANON-AB928221,ANON-15E08B3D,2026-07-01,clinical_review,completed,Main Clinic Suite A,1,0,0,0,0,12
+ANON-61A0DD95,ANON-15E08B3D,2026-07-18,counseling,missed,Community Health Center,0,1,0,0,0,11
+ANON-45161C82,ANON-15E08B3D,2026-10-12,lab_visit,scheduled,Annex Clinic Room 4,0,0,1,0,0,6
+ANON-A8AD19B3,ANON-15E08B3D,2026-10-09,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,5
+ANON-1BDA6504,ANON-15E08B3D,2026-07-23,refill,completed,Annex Clinic Room 4,1,0,0,0,0,6
+ANON-05CD3123,ANON-15E08B3D,2026-09-26,clinical_review,scheduled,Annex Clinic Room 4,0,0,1,0,0,5
+ANON-82C409D6,ANON-A0609DD7,2026-06-22,clinical_review,completed,Annex Clinic Room 4,1,0,0,0,0,5
+ANON-38A8F0BF,ANON-A0609DD7,2026-10-09,refill,scheduled,Community Health Center,0,0,1,0,0,5
+ANON-FADBB253,ANON-A0609DD7,2026-08-19,counseling,completed,Main Clinic Suite A,1,0,0,0,0,5
+ANON-946A6667,ANON-A0609DD7,2026-07-25,clinical_review,completed,East Wing Outpatient,1,0,0,0,0,6
+ANON-59925805,ANON-A0609DD7,2026-07-02,counseling,completed,East Wing Outpatient,1,0,0,0,0,10
+ANON-62675F4E,ANON-9F9EF7DF,2026-09-25,refill,scheduled,Annex Clinic Room 4,0,0,1,0,0,5
+ANON-60D13191,ANON-9F9EF7DF,2026-10-11,counseling,scheduled,Main Clinic Suite A,0,0,1,0,0,12

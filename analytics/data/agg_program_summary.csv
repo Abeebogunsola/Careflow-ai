@@ -1,0 +1,2 @@
+extraction_timestamp,total_clients,active_clients,total_appointments,completed_appointments,missed_appointments,adherence_rate_pct,total_interactions,total_followups,total_escalations
+2026-09-18T20:42:10.549217+00:00,102,91,433,237,62,79.26,550,62,18

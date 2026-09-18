@@ -34,6 +34,12 @@ from app.schemas.message import (
 from app.schemas.analytics import (
     AnalyticsOverviewRead,
     AnalyticsOverviewResponse,
+    AppointmentAnalyticsRead,
+    AppointmentAnalyticsResponse,
+    EscalationSummaryMetrics,
+    FollowUpSummaryMetrics,
+    EngagementAnalyticsRead,
+    EngagementAnalyticsResponse,
 )
 
 __all__ = [
@@ -73,5 +79,11 @@ __all__ = [
     "MessageProcessResponse",
     "AnalyticsOverviewRead",
     "AnalyticsOverviewResponse",
+    "AppointmentAnalyticsRead",
+    "AppointmentAnalyticsResponse",
+    "EscalationSummaryMetrics",
+    "FollowUpSummaryMetrics",
+    "EngagementAnalyticsRead",
+    "EngagementAnalyticsResponse",
 ]
 
