@@ -40,6 +40,20 @@ class Settings(BaseSettings):
     DB_MAX_OVERFLOW: int = 10
     DB_ECHO: bool = False
 
+    # AI Agent and LLM Configuration (Phase 7)
+    # Supported providers: "mock", "openai", "groq", "custom"
+    LLM_PROVIDER: str = "mock"
+    LLM_API_KEY: Union[str, None] = None
+    LLM_MODEL: str = "llama-3.3-70b-versatile"
+    LLM_BASE_URL: Union[str, None] = None
+    LLM_TEMPERATURE: float = 0.0
+    LLM_TIMEOUT_SECONDS: int = 15
+    EMERGENCY_CONTACT_INSTRUCTIONS: str = (
+        "If you are experiencing a medical emergency, please call your local emergency "
+        "services (911/112) or go to the nearest emergency center immediately. "
+        "Our clinic staff has also been notified."
+    )
+
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:

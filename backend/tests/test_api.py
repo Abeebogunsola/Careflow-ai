@@ -91,6 +91,8 @@ def test_openapi_schema_loads(client):
     assert "/api/v1/escalations" in schema["paths"]
     assert "/api/v1/approved-information" in schema["paths"]
     assert "/api/v1/audit-logs" in schema["paths"]
+    assert "/api/v1/messages" in schema["paths"]
+
 
 
 def test_docs_endpoints(client):

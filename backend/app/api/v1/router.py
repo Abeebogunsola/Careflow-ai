@@ -16,6 +16,7 @@ from app.api.v1.endpoints import (
     approved_info,
     audit_logs,
     users,
+    messages,
 )
 
 api_router = APIRouter()
@@ -30,3 +31,5 @@ api_router.include_router(escalations.router)
 api_router.include_router(approved_info.router)
 api_router.include_router(audit_logs.router)
 api_router.include_router(users.router)
+api_router.include_router(messages.router)
+

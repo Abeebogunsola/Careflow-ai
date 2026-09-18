@@ -26,8 +26,14 @@ from app.schemas.approved_info import (
 )
 from app.schemas.audit_log import AuditLogRead
 from app.schemas.user import RoleRead, UserCreate, UserRead
+from app.schemas.message import (
+    MessageProcessRequest,
+    MessageProcessResponseData,
+    MessageProcessResponse,
+)
 
 __all__ = [
+
     "PaginationMeta",
     "DataResponse",
     "PaginatedResponse",
@@ -57,4 +63,8 @@ __all__ = [
     "RoleRead",
     "UserCreate",
     "UserRead",
+    "MessageProcessRequest",
+    "MessageProcessResponseData",
+    "MessageProcessResponse",
 ]
+
