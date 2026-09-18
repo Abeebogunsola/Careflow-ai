@@ -1,0 +1,161 @@
+# =============================================================================
+# CareFlow AI — Production Multi-Container Orchestration Stack
+#
+# Services:
+# 1. postgres: PostgreSQL 15 Relational Persistence Engine
+# 2. backend: FastAPI REST API & Deterministic AI Orchestrator (4 Uvicorn Workers)
+# 3. frontend: Production React SPA served via Nginx Alpine
+# 4. n8n: Asynchronous Event & Scheduled Workflow Automation Engine
+# 5. gateway: Hardened Nginx Reverse Proxy with Rate Limiting & SSL Ingress
+# =============================================================================
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: careflow-prod-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-careflow_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Database password must be set in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-careflow_prod}
+    volumes:
+      - careflow_prod_pgdata:/var/lib/postgresql/data
+    networks:
+      - careflow_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-careflow_admin} -d $${POSTGRES_DB:-careflow_prod}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: careflow-prod-backend
+    restart: always
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4"
+    environment:
+      ENVIRONMENT: production
+      DEBUG: "False"
+      PROJECT_NAME: "CareFlow AI"
+      VERSION: "1.0.0"
+      API_V1_STR: "/api/v1"
+      SECRET_KEY: ${SECRET_KEY:?SECRET_KEY must be set in .env}
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-careflow_admin}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-careflow_prod}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://127.0.0.1}
+      DB_POOL_SIZE: ${DB_POOL_SIZE:-10}
+      DB_MAX_OVERFLOW: ${DB_MAX_OVERFLOW:-20}
+      DB_ECHO: "False"
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-llama-3.3-70b-versatile}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - careflow_network
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: careflow-prod-frontend
+    restart: always
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - careflow_network
+    expose:
+      - "80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: careflow-prod-n8n
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost/webhook/}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:?N8N_ENCRYPTION_KEY must be set in .env}
+      - GENERIC_TIMEZONE=UTC
+    volumes:
+      - careflow_prod_n8ndata:/home/node/.n8n
+      - ./n8n/workflows:/workflows:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - careflow_network
+    expose:
+      - "5678"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  gateway:
+    image: nginx:alpine
+    container_name: careflow-prod-gateway
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./deploy/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./deploy/certbot/conf:/etc/letsencrypt:ro
+      - ./deploy/certbot/www:/var/www/certbot:ro
+    depends_on:
+      - frontend
+      - backend
+      - n8n
+    networks:
+      - careflow_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+networks:
+  careflow_network:
+    name: careflow_prod_network
+    driver: bridge
+
+volumes:
+  careflow_prod_pgdata:
+    name: careflow_prod_postgres_data
+  careflow_prod_n8ndata:
+    name: careflow_prod_n8n_data
