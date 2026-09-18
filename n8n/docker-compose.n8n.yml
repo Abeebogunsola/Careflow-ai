@@ -1,0 +1,27 @@
+# CareFlow AI — Standalone n8n Docker Compose
+# Allows running the n8n automation engine independently from other services.
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: careflow-n8n-standalone
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT:-5678}:5678"
+    environment:
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=${N8N_PORT:-5678}
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - NODE_ENV=production
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost:5678/}
+      - GENERIC_TIMEZONE=UTC
+      - API_BASE_URL=${API_BASE_URL:-http://host.docker.internal:8000}
+      - REMINDER_WINDOW_HOURS=${REMINDER_WINDOW_HOURS:-24}
+      - MISSED_APPOINTMENT_GRACE_MINUTES=${MISSED_APPOINTMENT_GRACE_MINUTES:-60}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflows:/workflows:ro
+
+volumes:
+  n8n_data:
+    name: careflow_n8n_standalone_data

@@ -1,0 +1,111 @@
+{
+  "name": "CF — Automation Error Handler",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "node-error-trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Analyze error and determine retryability\nconst execution = $input.first().json.execution || {};\nconst workflow = $input.first().json.workflow || {};\nconst error = execution.error || {};\n\nconst errorMessage = error.message || 'Unknown automation execution failure';\nconst httpCode = error.httpCode || error.statusCode || null;\n\n// Transient network/infrastructure errors are retryable\nconst isRetryable = (\n  httpCode === 502 ||\n  httpCode === 503 ||\n  httpCode === 504 ||\n  errorMessage.includes('ECONNREFUSED') ||\n  errorMessage.includes('ETIMEDOUT') ||\n  errorMessage.includes('socket hang up')\n);\n\nreturn [{\n  json: {\n    workflow_name: workflow.name || 'CareFlow Workflow',\n    workflow_id: workflow.id,\n    execution_id: execution.id,\n    failed_node: execution.lastNodeExecuted || 'Unknown Node',\n    error_message: errorMessage,\n    http_status: httpCode,\n    is_retryable: isRetryable,\n    suggested_action: isRetryable \n      ? 'Transient network failure: schedule exponential backoff retry.'\n      : 'Non-retryable application/validation error: investigate payload and backend logs.',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-analyze-error",
+      "name": "Analyze Error & Retryability",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.is_retryable }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "node-if-retryable",
+      "name": "Check If Retryable",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format retry notification\nconst data = $input.first().json;\nreturn [{\n  json: {\n    event: 'AUTOMATION_ERROR_RETRYABLE',\n    alert_level: 'WARNING',\n    workflow: data.workflow_name,\n    failed_node: data.failed_node,\n    message: data.error_message,\n    action: data.suggested_action,\n    timestamp: data.timestamp\n  }\n}];"
+      },
+      "id": "node-format-retry-alert",
+      "name": "Format Retry Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format fatal ops alert\nconst data = $input.first().json;\nreturn [{\n  json: {\n    event: 'AUTOMATION_ERROR_FATAL',\n    alert_level: 'CRITICAL',\n    workflow: data.workflow_name,\n    failed_node: data.failed_node,\n    message: data.error_message,\n    http_status: data.http_status,\n    action: data.suggested_action,\n    timestamp: data.timestamp\n  }\n}];"
+      },
+      "id": "node-format-fatal-alert",
+      "name": "Format Fatal Ops Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 420]
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Analyze Error & Retryability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Error & Retryability": {
+      "main": [
+        [
+          {
+            "node": "Check If Retryable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check If Retryable": {
+      "main": [
+        [
+          {
+            "node": "Format Retry Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Fatal Ops Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "name": "CF — Barrier Follow-Up",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "barrier-event",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-barrier",
+      "name": "Webhook - Barrier Event",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Classify barrier category and validate\nconst body = $input.first().json.body || $input.first().json;\n\nif (!body.client_id) {\n  throw new Error('client_id is required for barrier follow-up.');\n}\n\nconst rawCategory = (body.barrier_category || 'other').toLowerCase();\nconst validCategories = [\n  'transport',\n  'schedule',\n  'communication',\n  'financial_or_logistical',\n  'social_support',\n  'clinic_access',\n  'technology',\n  'other'\n];\n\nconst category = validCategories.includes(rawCategory) ? rawCategory : 'other';\nconst notes = body.notes || 'Client reported non-clinical obstacle to care attendance';\n\nreturn [{\n  json: {\n    client_id: body.client_id,\n    barrier_category: category,\n    notes: notes,\n    priority: category === 'transport' ? 'high' : 'normal',\n    channel: body.channel || 'sms'\n  }\n}];"
+      },
+      "id": "node-classify-barrier",
+      "name": "Classify Barrier Category",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/followups",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $json.client_id }}\",\n  \"priority\": \"{{ $json.priority }}\",\n  \"reason\": \"Reported barrier to care: {{ $json.barrier_category }} - {{ $json.notes }}\"\n}",
+        "options": {}
+      },
+      "id": "node-create-barrier-task",
+      "name": "Create Support Follow-Up Task",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/interactions",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $('Classify Barrier Category').item.json.client_id }}\",\n  \"channel\": \"{{ $('Classify Barrier Category').item.json.channel }}\",\n  \"direction\": \"outgoing\",\n  \"interaction_type\": \"follow_up\",\n  \"content\": \"Thank you for letting us know. We have created a follow-up note for our support team regarding your {{ $('Classify Barrier Category').item.json.barrier_category }} request so we can help make your visit as smooth as possible.\"\n}",
+        "options": {}
+      },
+      "id": "node-record-barrier-interaction",
+      "name": "Record Acknowledgment Interaction",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"message\": \"Barrier task created and acknowledgment recorded.\",\n  \"followup_id\": \"{{ $('Create Support Follow-Up Task').item.json.data.id }}\"\n}",
+        "options": {}
+      },
+      "id": "node-respond-barrier-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1100, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Barrier Event": {
+      "main": [
+        [
+          {
+            "node": "Classify Barrier Category",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify Barrier Category": {
+      "main": [
+        [
+          {
+            "node": "Create Support Follow-Up Task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Support Follow-Up Task": {
+      "main": [
+        [
+          {
+            "node": "Record Acknowledgment Interaction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Record Acknowledgment Interaction": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}

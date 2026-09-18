@@ -1,0 +1,176 @@
+{
+  "name": "CF — Client Message Processing",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "careflow-message",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-client-message",
+      "name": "Webhook - Incoming Message",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate payload structure and normalize\nconst body = $input.first().json.body || $input.first().json;\n\nif (!body.client_id || !body.message) {\n  throw new Error('Invalid request: client_id and message are required.');\n}\n\nconst normalizedChannel = (body.channel || 'web').toLowerCase();\nconst validChannels = ['web', 'sms', 'whatsapp', 'email'];\nconst channel = validChannels.includes(normalizedChannel) ? normalizedChannel : 'web';\n\nreturn [{\n  json: {\n    client_id: body.client_id,\n    message: String(body.message).trim(),\n    channel: channel,\n    message_id: body.message_id || `msg-${Date.now()}`,\n    received_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-validate-normalize",
+      "name": "Validate & Normalize Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/messages",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $json.client_id }}\",\n  \"message\": \"{{ $json.message }}\",\n  \"channel\": \"{{ $json.channel }}\"\n}",
+        "options": {}
+      },
+      "id": "node-ai-agent-process",
+      "name": "Invoke AI Agent Service",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.data.escalated }}",
+              "value2": false
+            }
+          ]
+        }
+      },
+      "id": "node-if-decision",
+      "name": "Check Decision (Responded / Escalated)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare response for client\nconst agentData = $input.first().json.data;\nreturn [{\n  json: {\n    status: 'success',\n    escalated: agentData.escalated,\n    intent: agentData.intent,\n    reply_text: agentData.response,\n    interaction_id: agentData.interaction_id,\n    channel: $('Validate & Normalize Payload').item.json.channel\n  }\n}];"
+      },
+      "id": "node-format-response",
+      "name": "Format Client Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare escalation dispatch for staff oversight\nconst agentData = $input.first().json.data;\nreturn [{\n  json: {\n    status: 'escalated',\n    escalated: agentData.escalated,\n    intent: agentData.intent,\n    escalation_id: agentData.escalation_id,\n    client_reply: agentData.response,\n    requires_human_review: true,\n    escalation_timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-format-escalation",
+      "name": "Format Staff Escalation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 420]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "node-respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1360, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Incoming Message": {
+      "main": [
+        [
+          {
+            "node": "Validate & Normalize Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate & Normalize Payload": {
+      "main": [
+        [
+          {
+            "node": "Invoke AI Agent Service",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invoke AI Agent Service": {
+      "main": [
+        [
+          {
+            "node": "Check Decision (Responded / Escalated)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Decision (Responded / Escalated)": {
+      "main": [
+        [
+          {
+            "node": "Format Client Reply",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Staff Escalation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Client Reply": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Staff Escalation": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}

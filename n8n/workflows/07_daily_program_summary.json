@@ -1,0 +1,76 @@
+{
+  "name": "CF — Daily Program Summary",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * *"
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-daily-summary",
+      "name": "Schedule - Daily at 8 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/analytics/overview",
+        "options": {}
+      },
+      "id": "node-get-analytics-overview",
+      "name": "Fetch Program Metrics",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format de-identified program overview summary\nconst metrics = $input.first().json.data || {};\nconst reportDate = new Date().toLocaleDateString('en-US', {\n  weekday: 'long',\n  year: 'numeric',\n  month: 'long',\n  day: 'numeric'\n});\n\nconst formattedReport = `\n# CareFlow AI — Daily Program Summary Report\n**Date**: ${reportDate}\n\n## Operational Performance Metrics\n- **Active Enrolled Clients**: ${metrics.active_clients || 0}\n- **Upcoming Scheduled Visits**: ${metrics.appointments_scheduled || 0}\n- **Completed Visits**: ${metrics.appointments_completed || 0}\n- **Missed Appointments**: ${metrics.appointments_missed || 0}\n- **Pending Care Follow-Ups**: ${metrics.followups_pending || 0}\n- **Resolved Follow-Up Tasks**: ${metrics.followups_completed || 0}\n- **Open Human Escalations**: ${metrics.escalations_open || 0}\n- **Resolved Escalations**: ${metrics.escalations_resolved || 0}\n- **Total Recorded Interactions**: ${metrics.interactions_count || 0}\n\n*Note: This report strictly reflects aggregate operational counts with zero client-identifying or clinical health information.*\n`.trim();\n\nreturn [{\n  json: {\n    report_title: 'CareFlow AI Daily Program Summary',\n    report_date: reportDate,\n    metrics: metrics,\n    formatted_report: formattedReport,\n    generated_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-format-summary-report",
+      "name": "Format Executive Summary Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 300]
+    }
+  ],
+  "connections": {
+    "Schedule - Daily at 8 AM": {
+      "main": [
+        [
+          {
+            "node": "Fetch Program Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Program Metrics": {
+      "main": [
+        [
+          {
+            "node": "Format Executive Summary Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}

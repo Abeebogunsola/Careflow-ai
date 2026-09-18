@@ -1,0 +1,139 @@
+{
+  "name": "CF — Follow-Up Task Management",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 4
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-followup",
+      "name": "Schedule - Every 4 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/followups",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "status",
+              "value": "pending"
+            },
+            {
+              "name": "page_size",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-get-pending-followups",
+      "name": "Get Pending Follow-Ups",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter overdue and high-priority pending follow-ups requiring staff attention\nconst items = $input.all();\nconst now = new Date();\nconst overdueOrUrgent = [];\n\nfor (const item of items) {\n  const tasks = item.json.data || [];\n  for (const task of tasks) {\n    const isOverdue = task.due_at && new Date(task.due_at) < now;\n    const isUrgent = task.priority === 'urgent' || task.priority === 'high';\n    \n    // Flag if overdue, urgent, or unassigned older than 48 hours\n    const ageHours = (now.getTime() - new Date(task.created_at).getTime()) / (1000 * 60 * 60);\n    const isStaleUnassigned = !task.assigned_to && ageHours > 48;\n\n    if (isOverdue || isUrgent || isStaleUnassigned) {\n      overdueOrUrgent.push({\n        id: task.id,\n        client_id: task.client_id,\n        priority: task.priority,\n        reason: task.reason,\n        is_overdue: isOverdue,\n        is_urgent: isUrgent,\n        is_stale: isStaleUnassigned\n      });\n    }\n  }\n}\n\nreturn [{\n  json: {\n    total_pending_flagged: overdueOrUrgent.length,\n    tasks: overdueOrUrgent,\n    generated_at: now.toISOString()\n  }\n}];"
+      },
+      "id": "node-filter-overdue-tasks",
+      "name": "Identify Overdue & Urgent Tasks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.total_pending_flagged }}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "id": "node-if-has-flagged",
+      "name": "Check Flagged Count > 0",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format coordinator summary digest\nconst data = $input.first().json;\nconst summaryMessage = `Care Coordinator Alert: ${data.total_pending_flagged} pending follow-up task(s) require attention (overdue or high priority).`;\n\nreturn [{\n  json: {\n    event: 'FOLLOWUP_COORDINATOR_DIGEST',\n    summary: summaryMessage,\n    task_count: data.total_pending_flagged,\n    tasks: data.tasks,\n    dispatched_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-format-coordinator-digest",
+      "name": "Format Coordinator Digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 200]
+    }
+  ],
+  "connections": {
+    "Schedule - Every 4 Hours": {
+      "main": [
+        [
+          {
+            "node": "Get Pending Follow-Ups",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pending Follow-Ups": {
+      "main": [
+        [
+          {
+            "node": "Identify Overdue & Urgent Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Identify Overdue & Urgent Tasks": {
+      "main": [
+        [
+          {
+            "node": "Check Flagged Count > 0",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Flagged Count > 0": {
+      "main": [
+        [
+          {
+            "node": "Format Coordinator Digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}

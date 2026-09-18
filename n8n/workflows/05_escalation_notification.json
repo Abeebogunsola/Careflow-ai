@@ -1,0 +1,94 @@
+{
+  "name": "CF — Escalation Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "escalation-alert",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-escalation",
+      "name": "Webhook - Escalation Alert",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Classify escalation priority and determine notification dispatch\nconst body = $input.first().json.body || $input.first().json;\n\nif (!body.escalation_id || !body.category) {\n  throw new Error('escalation_id and category are required.');\n}\n\nconst category = body.category;\nlet alertLevel = 'ROUTINE';\nlet recipientTeam = 'care_coordination';\n\nif (category === 'emergency_related') {\n  alertLevel = 'EMERGENCY_IMMEDIATE';\n  recipientTeam = 'emergency_duty_clinician';\n} else if (category === 'clinical_concern' || category === 'medication_concern') {\n  alertLevel = 'HIGH_PRIORITY_CLINICAL';\n  recipientTeam = 'nursing_staff';\n} else if (category === 'human_request') {\n  alertLevel = 'STAFF_CALLBACK_REQUEST';\n  recipientTeam = 'care_coordinator';\n}\n\nreturn [{\n  json: {\n    escalation_id: body.escalation_id,\n    client_id: body.client_id || 'unknown',\n    category: category,\n    alert_level: alertLevel,\n    recipient_team: recipientTeam,\n    reason: body.reason || 'Escalation triggered by AI Agent safety boundary',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-determine-escalation-route",
+      "name": "Determine Severity & Routing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare structured staff alert payload\nconst data = $input.first().json;\nconst alertPayload = {\n  event: 'HUMAN_ESCALATION_TRIGGERED',\n  alert_level: data.alert_level,\n  recipient_team: data.recipient_team,\n  escalation_id: data.escalation_id,\n  category: data.category,\n  reason: data.reason,\n  action_required: data.alert_level === 'EMERGENCY_IMMEDIATE' \n    ? 'IMMEDIATE CLINICAL SAFETY PROTOCOL REQUIRED'\n    : 'HUMAN REVIEW REQUIRED WITHIN PROGRAM TIMEFRAME',\n  dispatched_at: data.timestamp\n};\n\nreturn [{\n  json: alertPayload\n}];"
+      },
+      "id": "node-dispatch-alert",
+      "name": "Format Staff Notification Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"message\": \"Escalation alert routed successfully to authorized personnel.\",\n  \"alert\": {{ JSON.stringify($json) }}\n}",
+        "options": {}
+      },
+      "id": "node-respond-escalation-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [880, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Escalation Alert": {
+      "main": [
+        [
+          {
+            "node": "Determine Severity & Routing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Determine Severity & Routing": {
+      "main": [
+        [
+          {
+            "node": "Format Staff Notification Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Staff Notification Alert": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}

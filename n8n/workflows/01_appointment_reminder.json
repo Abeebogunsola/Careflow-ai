@@ -1,0 +1,171 @@
+{
+  "name": "CF — Appointment Reminder",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-trigger",
+      "name": "Schedule - Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/appointments",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "status",
+              "value": "scheduled"
+            },
+            {
+              "name": "page_size",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-get-appointments",
+      "name": "Get Scheduled Appointments",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter appointments within the upcoming reminder window (default: 24 hours)\nconst items = $input.all();\nconst reminderWindowHours = Number($env.REMINDER_WINDOW_HOURS || 24);\nconst now = new Date();\nconst windowEnd = new Date(now.getTime() + reminderWindowHours * 60 * 60 * 1000);\n\nconst eligible = [];\n\nfor (const item of items) {\n  const appointments = item.json.data || [];\n  for (const appt of appointments) {\n    const scheduledTime = new Date(appt.scheduled_at);\n    if (scheduledTime > now && scheduledTime <= windowEnd && appt.status === 'scheduled') {\n      const dateFormatted = scheduledTime.toLocaleDateString('en-US', {\n        weekday: 'long',\n        month: 'short',\n        day: 'numeric'\n      });\n      const timeFormatted = scheduledTime.toLocaleTimeString('en-US', {\n        hour: '2-digit',\n        minute: '2-digit'\n      });\n      eligible.push({\n        json: {\n          appointment_id: appt.id,\n          client_id: appt.client_id,\n          scheduled_at: appt.scheduled_at,\n          appointment_type: appt.appointment_type,\n          location_label: appt.location_label || 'Main Clinic',\n          formatted_date: dateFormatted,\n          formatted_time: timeFormatted,\n          idempotency_key: `appointment-reminder-${appt.id}-${appt.scheduled_at.substring(0, 10)}`\n        }\n      });\n    }\n  }\n}\n\nreturn eligible;"
+      },
+      "id": "node-filter-window",
+      "name": "Filter Within Reminder Window",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/interactions",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "client_id",
+              "value": "={{ $json.client_id }}"
+            },
+            {
+              "name": "page_size",
+              "value": "20"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-check-prior-interactions",
+      "name": "Fetch Client Interactions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Idempotency Check: verify if an appointment reminder was already sent\nconst prevNodeData = $('Filter Within Reminder Window').item.json;\nconst interactionList = $input.first()?.json?.data || [];\n\nconst alreadySent = interactionList.some(interaction => {\n  if (interaction.interaction_type !== 'appointment_reminder') return false;\n  // Check if sent in the last 24 hours\n  const interactionTime = new Date(interaction.created_at).getTime();\n  const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);\n  return interactionTime > oneDayAgo;\n});\n\nif (alreadySent) {\n  return []; // Skip duplicate reminder\n}\n\n// Construct privacy-conscious reminder text (neutral: no sensitive medical terms, treatment, or diagnosis)\nconst reminderMessage = `Hello! This is a reminder of your upcoming appointment on ${prevNodeData.formatted_date} at ${prevNodeData.formatted_time} (${prevNodeData.location_label}). If you need to reschedule or need help with transportation, please reply to this message.`;\n\nreturn [{\n  json: {\n    ...prevNodeData,\n    reminder_text: reminderMessage,\n    channel: 'sms',\n    direction: 'outgoing',\n    interaction_type: 'appointment_reminder'\n  }\n}];"
+      },
+      "id": "node-idempotency-check",
+      "name": "Verify Idempotency & Build Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/interactions",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $json.client_id }}\",\n  \"channel\": \"{{ $json.channel }}\",\n  \"direction\": \"{{ $json.direction }}\",\n  \"interaction_type\": \"{{ $json.interaction_type }}\",\n  \"content\": \"{{ $json.reminder_text }}\"\n}",
+        "options": {}
+      },
+      "id": "node-record-interaction",
+      "name": "Record Outgoing Interaction",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 300]
+    }
+  ],
+  "connections": {
+    "Schedule - Every 15 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Scheduled Appointments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Scheduled Appointments": {
+      "main": [
+        [
+          {
+            "node": "Filter Within Reminder Window",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Within Reminder Window": {
+      "main": [
+        [
+          {
+            "node": "Fetch Client Interactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Client Interactions": {
+      "main": [
+        [
+          {
+            "node": "Verify Idempotency & Build Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Idempotency & Build Message": {
+      "main": [
+        [
+          {
+            "node": "Record Outgoing Interaction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}

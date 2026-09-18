@@ -1,0 +1,167 @@
+{
+  "name": "CF — Missed Appointment Detection",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "id": "node-schedule-missed",
+      "name": "Schedule - Every 30 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/appointments",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "status",
+              "value": "scheduled"
+            },
+            {
+              "name": "page_size",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-get-appointments-missed",
+      "name": "Get Scheduled Appointments",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Detect appointments that passed the scheduled time plus configured grace period (default: 60 mins)\nconst items = $input.all();\nconst gracePeriodMinutes = Number($env.MISSED_APPOINTMENT_GRACE_MINUTES || 60);\nconst now = new Date();\nconst missed = [];\n\nfor (const item of items) {\n  const appointments = item.json.data || [];\n  for (const appt of appointments) {\n    const scheduledTime = new Date(appt.scheduled_at);\n    const graceThreshold = new Date(scheduledTime.getTime() + gracePeriodMinutes * 60 * 1000);\n    \n    // If current time is strictly after scheduled_at + grace_period, appointment was missed\n    if (now > graceThreshold && appt.status === 'scheduled') {\n      missed.push({\n        json: {\n          appointment_id: appt.id,\n          client_id: appt.client_id,\n          scheduled_at: appt.scheduled_at,\n          appointment_type: appt.appointment_type,\n          support_message: \"Hello! We noticed that you were unable to make your scheduled visit earlier today. Your health and wellbeing are important to us. Please let us know if you would like help rescheduling or navigating any challenges.\"\n        }\n      });\n    }\n  }\n}\n\nreturn missed;"
+      },
+      "id": "node-identify-missed",
+      "name": "Identify Past Grace Period",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/appointments/{{ $json.appointment_id }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"status\": \"missed\"\n}",
+        "options": {}
+      },
+      "id": "node-mark-missed",
+      "name": "Mark Appointment Missed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/followups",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $('Identify Past Grace Period').item.json.client_id }}\",\n  \"priority\": \"normal\",\n  \"reason\": \"Missed appointment outreach and care re-engagement\"\n}",
+        "options": {}
+      },
+      "id": "node-create-followup-missed",
+      "name": "Create Re-Engagement Follow-Up",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.API_BASE_URL || 'http://backend:8000' }}/api/v1/interactions",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $('Identify Past Grace Period').item.json.client_id }}\",\n  \"channel\": \"sms\",\n  \"direction\": \"outgoing\",\n  \"interaction_type\": \"follow_up\",\n  \"content\": \"{{ $('Identify Past Grace Period').item.json.support_message }}\"\n}",
+        "options": {}
+      },
+      "id": "node-record-missed-interaction",
+      "name": "Record Missed Interaction",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 300]
+    }
+  ],
+  "connections": {
+    "Schedule - Every 30 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Scheduled Appointments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Scheduled Appointments": {
+      "main": [
+        [
+          {
+            "node": "Identify Past Grace Period",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Identify Past Grace Period": {
+      "main": [
+        [
+          {
+            "node": "Mark Appointment Missed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Appointment Missed": {
+      "main": [
+        [
+          {
+            "node": "Create Re-Engagement Follow-Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Re-Engagement Follow-Up": {
+      "main": [
+        [
+          {
+            "node": "Record Missed Interaction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "CareFlow AI"
+    }
+  ]
+}
