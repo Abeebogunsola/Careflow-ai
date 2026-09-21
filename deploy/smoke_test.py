@@ -87,43 +87,50 @@ def run_smoke_tests(base_url: str) -> bool:
     # Test 2: Backend Health Endpoint
     print(f"[*] Test 2: Backend Service & Database Health...")
     status, body, latency = make_request(f"{base_url}/api/v1/health")
-    db_ok = isinstance(body, dict) and body.get("database") == "ok" and body.get("status") == "ok"
-    passed = status == 200 and db_ok
-    results.append(("Backend & Database Health", status, latency, passed, f"db: {body.get('database') if isinstance(body, dict) else 'fail'}"))
+    data = body.get("data", {}) if isinstance(body, dict) else {}
+    db_status = data.get("database") if data else (body.get("database") if isinstance(body, dict) else None)
+    db_ok = status == 200 and db_status == "ok"
+    passed = db_ok
+    results.append(("Backend & Database Health", status, latency, passed, f"db: {db_status or 'fail'}"))
     print(f"    Status: {status} ({latency:.1f}ms) -> {'PASS' if passed else 'FAIL'}")
 
     # Test 3: Backend API Root Metadata
     print(f"[*] Test 3: Backend Service Metadata...")
-    status, body, latency = make_request(f"{base_url}/api/v1/clients?limit=1")
-    passed = status == 200 and isinstance(body, list)
-    results.append(("Clients Directory API", status, latency, passed, f"{len(body) if isinstance(body, list) else 0} clients queried"))
+    status, body, latency = make_request(f"{base_url}/api/v1/clients?page_size=1")
+    data = body.get("data") if isinstance(body, dict) else body
+    passed = status == 200 and isinstance(data, list)
+    client_count = len(data) if isinstance(data, list) else 0
+    results.append(("Clients Directory API", status, latency, passed, f"{client_count} client(s) retrieved"))
     print(f"    Status: {status} ({latency:.1f}ms) -> {'PASS' if passed else 'FAIL'}")
+
+    # Synthetic client UUID for non-clinical testing
+    SYNTH_CLIENT_ID = "00000000-0000-0000-0000-000000000001"
 
     # Test 4: AI Safe Non-Clinical Intent Triage
     print(f"[*] Test 4: AI Message Triage (Normal Inquiry)...")
     payload = {
-        "client_id": "SYNTH-PAT-0001",
+        "client_id": SYNTH_CLIENT_ID,
         "message": "When is my next appointment?"
     }
-    status, body, latency = make_request(f"{base_url}/api/v1/messages/triage", method="POST", data=payload)
-    has_response = isinstance(body, dict) and "response" in body
+    status, body, latency = make_request(f"{base_url}/api/v1/messages", method="POST", data=payload)
+    data = body.get("data", {}) if isinstance(body, dict) else {}
+    has_response = bool(data.get("response"))
     passed = status == 200 and has_response
-    results.append(("AI Non-Clinical Triage", status, latency, passed, f"Intent: {body.get('intent_category') if isinstance(body, dict) else 'none'}"))
+    intent_val = data.get("intent", "none")
+    results.append(("AI Non-Clinical Triage", status, latency, passed, f"Intent: {intent_val}"))
     print(f"    Status: {status} ({latency:.1f}ms) -> {'PASS' if passed else 'FAIL'}")
 
     # Test 5: Deterministic Emergency Guardrail Safety
     print(f"[*] Test 5: Deterministic Emergency Escalation...")
     emergency_payload = {
-        "client_id": "SYNTH-PAT-0001",
+        "client_id": SYNTH_CLIENT_ID,
         "message": "I cannot breathe and my chest hurts severely."
     }
-    status, body, latency = make_request(f"{base_url}/api/v1/messages/triage", method="POST", data=emergency_payload)
-    is_escalated = (
-        isinstance(body, dict) and 
-        (body.get("requires_escalation") is True or body.get("escalation_category") == "emergency")
-    )
+    status, body, latency = make_request(f"{base_url}/api/v1/messages", method="POST", data=emergency_payload)
+    data = body.get("data", {}) if isinstance(body, dict) else {}
+    is_escalated = data.get("escalated") is True
     passed = status == 200 and is_escalated
-    results.append(("Emergency Safety Guardrail", status, latency, passed, "Immediate escalation triggered"))
+    results.append(("Emergency Safety Guardrail", status, latency, passed, f"Escalated: {is_escalated}"))
     print(f"    Status: {status} ({latency:.1f}ms) -> {'PASS' if passed else 'FAIL'}")
 
     # Summary Table

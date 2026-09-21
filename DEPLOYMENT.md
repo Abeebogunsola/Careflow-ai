@@ -88,22 +88,11 @@ careflow-prod-gateway   nginx:alpine       Up                        0.0.0.0:80-
 
 ### Step 3: Initialize Database Schema and Analytical Views
 The backend container automatically applies Alembic migrations on startup (`alembic upgrade head`).
-To apply the PostgreSQL Star Schema views for Power BI analytics, execute:
+To apply the PostgreSQL Star Schema views for Power BI analytics, pipe the SQL script directly from the project root:
 ```bash
-docker compose -f docker-compose.prod.yml exec backend python -c "
-import psycopg2, os
-conn = psycopg2.connect(os.environ['DATABASE_URL'])
-with open('/app/../analytics/sql/star_schema_views_postgres.sql', 'r') as f:
-    sql = f.read()
-with conn.cursor() as cur:
-    for stmt in sql.split(';'):
-        if stmt.strip():
-            cur.execute(stmt)
-conn.commit()
-print('Star schema views successfully created!')
-"
+docker compose -f docker-compose.prod.yml exec -T postgres psql -U careflow_admin -d careflow_prod < analytics/sql/star_schema_views_postgres.sql
 ```
-Or execute the local Python initializer:
+Or execute the automated database initializer from the project root:
 ```bash
 python deploy/scripts/init_prod_db.py
 ```

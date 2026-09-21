@@ -106,6 +106,7 @@ services:
       - N8N_PORT=5678
       - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
       - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PATH=/n8n/
       - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost/webhook/}
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:?N8N_ENCRYPTION_KEY must be set in .env}
       - GENERIC_TIMEZONE=UTC
