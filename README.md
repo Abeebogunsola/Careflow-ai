@@ -651,35 +651,73 @@ Never commit `.env`.
 
 # 22. Start the Application
 
-The intended development architecture uses Docker Compose.
+### Option A: PowerShell Workflow (Recommended for Windows)
 
-```bash
-docker compose up --build
+Use the automated local startup script to verify Docker availability, start the required local development services (PostgreSQL 15 and n8n Workflow Automation), wait for database health initialization, and display active service URLs:
+
+```powershell
+.\start.ps1
 ```
 
-To run in detached mode:
+To inspect the status, health, and port bindings of local development containers at any time:
 
-```bash
-docker compose up --build -d
+```powershell
+.\status.ps1
 ```
 
-The exact services and ports should be documented here once the implementation is finalized.
+Once background services are active:
+
+1. **Backend API (FastAPI)**:
+   ```powershell
+   cd backend
+   .\.venv\Scripts\activate
+   alembic upgrade head
+   uvicorn app.main:app --reload --port 8000
+   ```
+   API Docs: `http://localhost:8000/api/v1/docs`
+
+2. **Frontend UI (React + Vite)**:
+   ```powershell
+   cd frontend
+   npm run dev
+   ```
+   Web Application: `http://localhost:5173`
+
+### Option B: Manual Docker Compose
+
+Alternatively, launch the local background services directly:
+
+```bash
+docker compose up -d
+```
 
 ---
 
 # 23. Stop the Application
 
+### Option A: PowerShell Workflow (Recommended for Windows)
+
+To cleanly stop local development services without removing persistent database records or n8n workflow credentials:
+
+```powershell
+.\stop.ps1
+```
+
+This runs `docker compose down` without the `-v` flag, ensuring that persistent volumes (`careflow_postgres_data` and `careflow_n8n_data`) are preserved intact.
+
+### Option B: Manual Docker Compose
+
 ```bash
 docker compose down
 ```
 
-If persistent development volumes are intentionally being removed:
+If persistent development volumes are intentionally being removed and reset:
 
 ```bash
 docker compose down -v
 ```
 
-Use the second command carefully because it may remove local database data.
+Use the second command carefully because it permanently removes local database data.
 
 ---
 
